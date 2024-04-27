@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+import numpy as np
 
 st.subheader("File upload")
 
@@ -41,18 +42,35 @@ if file:
     # Data Encoding
     st.subheader("Categorical data encoding")
     # Detecting categorical columns
-    cat_cols = []
-    for col in df.columns:
-        if df[col].dtype == object:
-            df[col] = df[col].to_numpy().reshape(-1, 1)
-            cat_cols.append(col)
+    cat_cols = df.select_dtypes(include=["object"]).columns.to_list()
 
     enc = st.radio("Select encoder", ["Label encoder", "One-Hot encoder"])
 
-    if enc == "Label encoder":
-        enc = LabelEncoder()
-        df[cat_cols] = enc.fit_transform(df[cat_cols])
-
     if enc == "One-Hot encoder":
-        enc = OneHotEncoder()
-        df[cat_cols] = enc.fit_transform(df[cat_cols])
+        # encoder = OneHotEncoder()
+        # enc_arr = encoder.fit_transform(df[cat_cols])
+        # enc_df = pd.DataFrame(enc_arr, index=df.index)
+        # other_cols = df.drop(columns=cat_cols)
+        # df_encoded = pd.concat([enc_df, other_cols], axis=1)
+        # df = df_encoded
+        # st.dataframe(df)
+        # ---------------
+        # ohe = OneHotEncoder(categories="auto")
+        # feature_arr = ohe.fit_transform(df[cat_cols]).toarray()
+        # feature_labels = ohe.categories_
+        # feature_labels = np.array(feature_labels).ravel()
+        # features = pd.DataFrame(feature_arr, columns=feature_labels)
+        # st.dataframe(df)
+        pass
+
+    if enc == "Label encoder":
+        df[cat_cols] = df[cat_cols].apply(LabelEncoder().fit_transform)
+        st.dataframe(df)
+
+    # Detect classificatoion or regression
+    if df[y].nunique() == 2:
+        type = "class"
+    else:
+        type = "reg"
+
+    st.write(type)
