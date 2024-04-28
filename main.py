@@ -47,24 +47,21 @@ if file:
     enc = st.radio("Select encoder", ["Label encoder", "One-Hot encoder"])
 
     if enc == "One-Hot encoder":
-        # encoder = OneHotEncoder()
-        # enc_arr = encoder.fit_transform(df[cat_cols])
-        # enc_df = pd.DataFrame(enc_arr, index=df.index)
-        # other_cols = df.drop(columns=cat_cols)
-        # df_encoded = pd.concat([enc_df, other_cols], axis=1)
-        # df = df_encoded
-        # st.dataframe(df)
-        # ---------------
-        # ohe = OneHotEncoder(categories="auto")
-        # feature_arr = ohe.fit_transform(df[cat_cols]).toarray()
-        # feature_labels = ohe.categories_
-        # feature_labels = np.array(feature_labels).ravel()
-        # features = pd.DataFrame(feature_arr, columns=feature_labels)
-        # st.dataframe(df)
-        pass
+        encoder = OneHotEncoder()
+        enc_arr = encoder.fit_transform(df[cat_cols])
+        enc_df = pd.DataFrame(enc_arr, index=df.index)
+        other_cols = df.drop(columns=cat_cols)
+        df_encoded = pd.concat([enc_df, other_cols], axis=1)
+        df = df_encoded
+        st.dataframe(df)
 
     if enc == "Label encoder":
-        df[cat_cols] = df[cat_cols].apply(LabelEncoder().fit_transform)
+        encoder = LabelEncoder()
+        enc_arr = encoder.fit_transform(df[cat_cols])
+        enc_df = pd.DataFrame(enc_arr, index=df.index)
+        other_cols = df.drop(columns=cat_cols)
+        df_encoded = pd.concat([enc_df, other_cols], axis=1)
+        df = df_encoded
         st.dataframe(df)
 
     # Detect classificatoion or regression
