@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
-import sklearn
+import os
+
+os.system("sudo pip install scikit-learn")
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
