@@ -129,6 +129,6 @@ if file:
         sample = predict_model(best_model, df.sample(10))
         st.write("Sample prediction", sample)
 
-        # Best model name
-        metrics.Model.tolist()
-        model_name = str(metrics[:1]["Model"][0])
+        # # Best model name
+        # metrics.Model.tolist()
+        # model_name = str(metrics[:1]["Model"][0])
