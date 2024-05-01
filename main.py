@@ -110,23 +110,9 @@ if file:
         sample = predict_model(best_model, df.sample(10))
         st.write("Sample prediction", sample)
 
-        # creating model file
-        metrics.Model.tolist()
-        model_name = str(metrics[:1]["Model"][0])
-
-        # Saving best model
-        # st.write("Save best model", save_model(best_model, model_name=model_name))
-
-        # st.link_button(
-        #     label="Download model", url=save_model(best_model, model_name=model_name)
-        # )
-
-        # ### Download best model ###
-        # st.download_button(
-        #     label="Download model",
-        #     data=save_model(best_model, model_name=model_name),
-        #     file_name="model",
-        # )
+        # # best model name
+        # metrics.Model.tolist()
+        # model_name = str(metrics[:1]["Model"][0])
 
     # Regression model
     elif type == "reg":
@@ -143,20 +129,6 @@ if file:
         sample = predict_model(best_model, df.sample(10))
         st.write("Sample prediction", sample)
 
-        # creating model file
+        # Best model name
         metrics.Model.tolist()
         model_name = str(metrics[:1]["Model"][0])
-
-        # Saving best model
-        # st.write("Save best model", save_model(best_model, model_name=model_name))
-
-        # st.link_button(
-        #     label="Download model", url=save_model(best_model, model_name=model_name)
-        # )
-
-        # ### Download best model ###
-        # st.download_button(
-        #     label="Download model",
-        #     data=save_model(best_model, model_name=model_name),
-        #     file_name="model",
-        # )
