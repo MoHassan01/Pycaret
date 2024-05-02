@@ -94,40 +94,42 @@ if file:
         type = "reg"
 
     # Creating the model using Pycaret
+    model_button = st.button(label="Train model")
 
-    # Classification model
-    if type == "class":
-        # st.write("class")
-        from pycaret.classification import *
+    if model_button:
+        # Classification model
+        if type == "class":
+            # st.write("class")
+            from pycaret.classification import *
 
-        exp = setup(df, target=y, categorical_features=cat_cols)
-        best_model = compare_models()
-        metrics = exp.pull()
-        st.write("Best model Ranking")
-        st.write(metrics)
+            exp = setup(df, target=y, categorical_features=cat_cols)
+            best_model = compare_models()
+            metrics = exp.pull()
+            st.write("Best model Ranking")
+            st.write(metrics)
 
-        # Model prediction
-        sample = predict_model(best_model, df.sample(10))
-        st.write("Sample prediction", sample)
+            # Model prediction
+            sample = predict_model(best_model, df.sample(10))
+            st.write("Sample prediction", sample)
 
-        # # best model name
-        # metrics.Model.tolist()
-        # model_name = str(metrics[:1]["Model"][0])
+            # # best model name
+            # metrics.Model.tolist()
+            # model_name = str(metrics[:1]["Model"][0])
 
-    # Regression model
-    elif type == "reg":
-        # st.write("reg")
-        from pycaret.regression import *
+        # Regression model
+        elif type == "reg":
+            # st.write("reg")
+            from pycaret.regression import *
 
-        exp = setup(df, target=y, categorical_features=cat_cols)
-        best_model = compare_models()
-        metrics = exp.pull()
-        st.write("Best model Ranking")
-        st.write(metrics)
+            exp = setup(df, target=y, categorical_features=cat_cols)
+            best_model = compare_models()
+            metrics = exp.pull()
+            st.write("Best model Ranking")
+            st.write(metrics)
 
-        # Model prediction
-        sample = predict_model(best_model, df.sample(10))
-        st.write("Sample prediction", sample)
+            # Model prediction
+            sample = predict_model(best_model, df.sample(10))
+            st.write("Sample prediction", sample)
 
         # # Best model name
         # metrics.Model.tolist()
