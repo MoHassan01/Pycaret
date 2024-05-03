@@ -93,10 +93,22 @@ if file:
     else:
         type = "reg"
 
-    # Creating the model using Pycaret
-    model_button = st.button(label="Train model")
+    ##########
+    # Creating session state for the two buttons
+    # Initialize the key in session state
+    if "clicked" not in st.session_state:
+        st.session_state.clicked = {1: False, 2: False}
 
-    if model_button:
+    # Function to update the value in session state
+    def clicked(button):
+        st.session_state.clicked[button] = True
+
+    ##############################
+
+    # Model button
+    st.button("Run model", on_click=clicked, args=[1])
+
+    if st.session_state.clicked[1]:
         # Classification model
         if type == "class":
             # st.write("class")
@@ -108,9 +120,12 @@ if file:
             st.write("Best model Ranking")
             st.write(metrics)
 
+            # Model prediction button
+            st.button("Get sample predictions", on_click=clicked, args=[2])
             # Model prediction
-            sample = predict_model(best_model, df.sample(10))
-            st.write("Sample prediction", sample)
+            if st.session_state.clicked[2]:
+                sample = predict_model(best_model, df.sample(10))
+                st.write("Sample prediction", sample)
 
             # # best model name
             # metrics.Model.tolist()
@@ -127,9 +142,12 @@ if file:
             st.write("Best model Ranking")
             st.write(metrics)
 
+            # Model prediction button
+            st.button("Get sample predictions", on_click=clicked, args=[2])
             # Model prediction
-            sample = predict_model(best_model, df.sample(10))
-            st.write("Sample prediction", sample)
+            if st.session_state.clicked[2]:
+                sample = predict_model(best_model, df.sample(10))
+                st.write("Sample prediction", sample)
 
         # # Best model name
         # metrics.Model.tolist()
