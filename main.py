@@ -23,7 +23,7 @@ if file:
     #### Unnecessary columns removal ####
     cols = st.multiselect("Remove columns", df.columns)
     df.drop(columns=cols, axis=1, inplace=True)
-    st.write("Columns", df.columns)
+    st.write("Data sample", df.sample(15))
 
     #### Hadling missing values ####
 
@@ -112,7 +112,7 @@ if file:
         # Classification model
         if type == "class":
             # st.write("class")
-            from pycaret.classification import *
+            from pycaret.classification import setup, compare_models, predict_model
 
             exp = setup(df, target=y, categorical_features=cat_cols)
             best_model = compare_models()
@@ -134,7 +134,7 @@ if file:
         # Regression model
         elif type == "reg":
             # st.write("reg")
-            from pycaret.regression import *
+            from pycaret.regression import setup, compare_models, predict_model
 
             exp = setup(df, target=y, categorical_features=cat_cols)
             best_model = compare_models()
