@@ -114,7 +114,7 @@ if file:
             # st.write("class")
             from pycaret.classification import setup, compare_models, predict_model
 
-            exp = setup(df, target=y)
+            exp = setup(df, target=y, categorical_features=cat_cols)
             best_model = compare_models()
             metrics = exp.pull()
             st.write("Best model Ranking")
@@ -136,7 +136,7 @@ if file:
             # st.write("reg")
             from pycaret.regression import setup, compare_models, predict_model
 
-            exp = setup(df, target=y)
+            exp = setup(df, target=y, categorical_features=cat_cols)
             best_model = compare_models()
             metrics = exp.pull()
             st.write("Best model Ranking")
